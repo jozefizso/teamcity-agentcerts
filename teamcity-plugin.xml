@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<teamcity-plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:shemas-jetbrains-com:teamcity-plugin-v1-xml">
+  <info>
+    <name>teamcity-agentcerts</name>
+    <display-name>teamcity-agentcerts</display-name>
+    <version>@Version@</version>
+    <description>Detects code signing certificates available on build agent machines.</description>
+    <download-url>https://github.com/jozefizso/teamcity-code-signing</download-url>
+    <email>jozef.izso@gmail.com</email>
+    <vendor>
+      <name>Jozef Izso</name>
+      <url>http://goit.sk</url>
+    </vendor>
+  </info>
+  <deployment use-separate-classloader="true" />
+</teamcity-plugin>
