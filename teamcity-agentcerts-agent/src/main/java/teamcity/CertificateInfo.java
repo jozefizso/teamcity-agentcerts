@@ -5,12 +5,10 @@ import org.bouncycastle.asn1.x500.RDN;
 import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x500.style.BCStyle;
 import org.bouncycastle.asn1.x500.style.IETFUtils;
-import org.bouncycastle.cert.jcajce.JcaX509CertificateHolder;
+import org.bouncycastle.cert.X509CertificateHolder;
 import org.jetbrains.annotations.NotNull;
-import sun.security.x509.X509CertImpl;
 
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
+import java.io.IOException;
 
 public class CertificateInfo {
     private final String friendlyName;
@@ -29,12 +27,11 @@ public class CertificateInfo {
         return thumbprint;
     }
 
-    public static CertificateInfo readCertificate(@NotNull byte[] blob) throws CertificateException {
-        X509Certificate cert = new X509CertImpl(blob);
+    public static CertificateInfo readCertificate(@NotNull byte[] blob) throws IOException {
+        X509CertificateHolder cert = new X509CertificateHolder(blob);
 
-        boolean isDigitalSignature = CertificateHelpers.isDigitalSignature(cert.getKeyUsage());
-        if (isDigitalSignature) {
-            X500Name x500name = new JcaX509CertificateHolder(cert).getSubject();
+        if (CertificateHelpers.isCodeSigning(cert)) {
+            X500Name x500name = cert.getSubject();
             RDN cn = x500name.getRDNs(BCStyle.CN)[0];
 
             String friendlyName = IETFUtils.valueToString(cn.getFirst().getValue());

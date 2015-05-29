@@ -1,12 +1,27 @@
 package teamcity;
 
-public class CertificateHelpers {
+import org.bouncycastle.asn1.x509.ExtendedKeyUsage;
+import org.bouncycastle.asn1.x509.KeyPurposeId;
+import org.bouncycastle.asn1.x509.KeyUsage;
+import org.bouncycastle.cert.X509CertificateHolder;
 
-    public static boolean isDigitalSignature(boolean[] keyUsage) {
-        if (keyUsage == null || keyUsage.length == 0) {
+
+public class CertificateHelpers {
+    public static boolean isCodeSigning(X509CertificateHolder cert) {
+        if (cert == null) {
             return false;
         }
 
-        return keyUsage[0];
+        if (!cert.hasExtensions()) {
+            return false;
+        }
+
+        KeyUsage keyUsage = KeyUsage.fromExtensions(cert.getExtensions());
+        if (keyUsage == null || !keyUsage.hasUsages(KeyUsage.digitalSignature)) {
+            return false;
+        }
+
+        ExtendedKeyUsage ext = ExtendedKeyUsage.fromExtensions(cert.getExtensions());
+        return ext.hasKeyPurposeId(KeyPurposeId.id_kp_codeSigning);
     }
 }
