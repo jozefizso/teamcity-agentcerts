@@ -5,10 +5,7 @@ jdk:
   - openjdk7
 
 scripts:
-  - mvn test
-
-after_success:
-  - mvn clean cobertura:cobertura coveralls:report
+  - mvn test cobertura:cobertura coveralls:report
 
 cache:
   directories:
