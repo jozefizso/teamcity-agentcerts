@@ -3,3 +3,17 @@ script: mvn test
 jdk:
   - oraclejdk7
   - openjdk7
+
+scripts:
+  - mvn test
+
+after_success:
+  - mvn clean cobertura:cobertura coveralls:report
+
+cache:
+  directories:
+    - $HOME/.m2
+
+env:
+  global:
+    secure: Hz4ngaq8L83K3caGxHdmOn8HYRmiw3Ggn3ZqXQhjFzrcRXrcz1gk9Ke8rTrHonT3Mu5ea3z6v5t/7ec7vWiF6dl4MOaq1AhikvMl66ddD/HNeXcwJ1tRA85E97maZpdZEDroDQQzidwRP0EvbnpqRUMpOZiMHp1QGXWIgaSvgHcdQ48yLIi+m8Qb03usM0dPw8khqBi40oD+cd3StWBt3JyJfTQjmE8ui1XcmA2jtBDeMqfOtdFiBDoHuV+tXSwBq5zCba6/ODyEAnu6dGiLONGeoUmLMP0kE29IJr36YBz/lAM2Tf105qgrAKOLBoVtTXKhqgmilgpWvi9N5baC7fTacIQU1bcJwL5Ucl0amAQ7Mf/Qb3Q8f4moNU79Ja9IMKJe+TLLpmfsNGXHh2m5/udSXmtUSv70i/i1BR1JVbvO0vJ23FtVa907Gqgxxj4L1peljfFq+O7Mi3cBEYu02w6EmOk5oSUgMwYDK8z4j7BKl3om6YouW7k92MoSkR/r8FdokJfJZX8iBgJUJt+sDDzGKIoJGFdmBS3WdBNPec/j09DFQI4O01kWOzQvBGI/YtXbxV1q91LRhRckA+ExjvhddWxCZyiJMCN5S3ll+Q4EjvRU2OS7f69k69WNluRPOcjY6mMZ67wlMBiIzk6Us6TfChmQh4MVhcuLIki1nho=
