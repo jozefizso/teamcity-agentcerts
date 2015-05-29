@@ -1,5 +1,6 @@
 TeamCity Agent - Code Signing Certificates
 ==============================================================
+![Travis Build](https://img.shields.io/travis/jozefizso/teamcity-agentcerts.svg)
 
 This plugin extends TeamCity Build Agent with [Configuration Parameters](http://confluence.jetbrains.net/display/TCD6/Configuration+and+Build+Parameters)
 based on the list of Code Signing certificates in the user and computer certificates store on Windows.
