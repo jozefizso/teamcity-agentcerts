@@ -35,6 +35,7 @@ public class CertificateInfoTest {
         // Assert
         assertNotNull(certificateInfo);
         assertEquals(certificateInfo.getFriendlyName(), "Acme Code Signing (Do Not Trust)");
+        assertEquals(certificateInfo.getThumbprint(), "581551E899B07528707E55915A910D6820DED563");
     }
 
     private static byte[] loadCertificate(String resourceName) throws Exception {
